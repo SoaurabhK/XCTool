@@ -18,7 +18,8 @@ enum Constants {
 }
 
 func model<T: Decodable>(for type: T.Type, launchPath: String, arguments: [String]) -> T? {
-    let data = runCommand(launchPath: launchPath, arguments: arguments)
+    let command = REPLCommand(launchPath: launchPath, arguments: arguments)
+    let data = command.run()
     guard data.exitStatus == 0 else { return nil }
     guard let outData = data.result?.data(using: .utf8) else { return nil }
     let result = try? JSONDecoder().decode(T.self, from: outData)
@@ -26,8 +27,13 @@ func model<T: Decodable>(for type: T.Type, launchPath: String, arguments: [Strin
 }
 
 func execTest(with xcodebuildExecPath: String, arguments: [String]) -> String? {
-    let result = execTest(launchPath: xcodebuildExecPath, args: arguments)
-    return result.xcresultPath?.trimmingCharacters(in: CharacterSet(charactersIn: "\t"))
+    var xcresultPath: String?
+    let command = REPLCommand(launchPath: xcodebuildExecPath, arguments: arguments)
+    command.run { (lines) in
+        lines?.forEach({ print($0) })
+        xcresultPath = lines?.first(where: { $0.hasSuffix(".xcresult")})?.trimmingCharacters(in: CharacterSet(charactersIn: "\t"))
+    }
+    return xcresultPath
 }
 
 let resultFilePath = execTest(with: Constants.xcodebuildExecPath, arguments: Constants.xcodebuildExecArg)

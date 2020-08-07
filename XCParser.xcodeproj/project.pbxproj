@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B53404B724D6E6CF00B33393 /* RunCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53404B624D6E6CF00B33393 /* RunCommand.swift */; };
+		B53404B724D6E6CF00B33393 /* REPLCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53404B624D6E6CF00B33393 /* REPLCommand.swift */; };
 		B537B11024DD28BD00E0DF06 /* ActionTestPlanRunSummaries.swift in Sources */ = {isa = PBXBuildFile; fileRef = B537B10F24DD28BD00E0DF06 /* ActionTestPlanRunSummaries.swift */; };
 		B537B11224DD903300E0DF06 /* ActionsInvocationRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B537B11124DD903300E0DF06 /* ActionsInvocationRecord.swift */; };
 		B5385F0D24D9534700A64CB4 /* REPLBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5385F0C24D9534700A64CB4 /* REPLBuffer.swift */; };
@@ -28,7 +28,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B53404B624D6E6CF00B33393 /* RunCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunCommand.swift; sourceTree = "<group>"; };
+		B53404B624D6E6CF00B33393 /* REPLCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REPLCommand.swift; sourceTree = "<group>"; };
 		B537B10F24DD28BD00E0DF06 /* ActionTestPlanRunSummaries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTestPlanRunSummaries.swift; sourceTree = "<group>"; };
 		B537B11124DD903300E0DF06 /* ActionsInvocationRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsInvocationRecord.swift; sourceTree = "<group>"; };
 		B5385F0C24D9534700A64CB4 /* REPLBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REPLBuffer.swift; sourceTree = "<group>"; };
@@ -71,7 +71,7 @@
 				B537B11124DD903300E0DF06 /* ActionsInvocationRecord.swift */,
 				B537B10F24DD28BD00E0DF06 /* ActionTestPlanRunSummaries.swift */,
 				B54F1FA624D5EF6100D5AC00 /* ActionTestSummary.swift */,
-				B53404B624D6E6CF00B33393 /* RunCommand.swift */,
+				B53404B624D6E6CF00B33393 /* REPLCommand.swift */,
 				B5385F0C24D9534700A64CB4 /* REPLBuffer.swift */,
 			);
 			path = XCParser;
@@ -138,7 +138,7 @@
 				B5F77C0024D5666F00953D63 /* main.swift in Sources */,
 				B537B11024DD28BD00E0DF06 /* ActionTestPlanRunSummaries.swift in Sources */,
 				B537B11224DD903300E0DF06 /* ActionsInvocationRecord.swift in Sources */,
-				B53404B724D6E6CF00B33393 /* RunCommand.swift in Sources */,
+				B53404B724D6E6CF00B33393 /* REPLCommand.swift in Sources */,
 				B54F1FA824D5F3F200D5AC00 /* ActionTestSummary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
