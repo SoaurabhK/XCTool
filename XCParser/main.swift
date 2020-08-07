@@ -37,26 +37,27 @@ guard let xcresultFilePath = resultFilePath, FileManager.default.fileExists(atPa
 print("===== xcresultFilePath: \(xcresultFilePath) =====")
 
 
-func parseTestSummaries(from xcresultFilePath: String) -> [TestSummary] {
-    var testSummaries = [TestSummary]()
+func parseTestSummaries(from xcresultFilePath: String) -> [ActionTestSummary] {
+    var testSummaries = [ActionTestSummary]()
     
     let arguments = Constants.xcresulttoolArg + [xcresultFilePath]
     
-    let root = model(for: Root.self, launchPath: Constants.xcrunExecPath, arguments: arguments)
+    let root = model(for: ActionsInvocationRecord.self, launchPath: Constants.xcrunExecPath, arguments: arguments)
     guard let rootModel = root else { return testSummaries }
     
-    let testRefId = rootModel.actions.values.first?.actionResult.testsRef.id.value
+    let testRefId = rootModel.actions.first?.actionResult.testsRef.id
     guard let testRefIdValue = testRefId else { return testSummaries }
     
-    let test = model(for: Test.self, launchPath: Constants.xcrunExecPath, arguments: arguments + ["--id", testRefIdValue])
+    let test = model(for: ActionTestPlanRunSummaries.self, launchPath: Constants.xcrunExecPath, arguments: arguments + ["--id", testRefIdValue])
     guard let testModel = test else { return testSummaries }
     
-    let testableSummaries = testModel.summaries.values.first?.testableSummaries.values
+    let testableSummaries = testModel.summaries.first?.testableSummaries
     guard let testableSummaryValues = testableSummaries else { return testSummaries }
 
     let summaryRefIdValues = testableSummaryValues.reduce([String?]()) { (accumulator, testableSummaryValue) -> [String?] in
-        let result =  testableSummaryValue.tests.values.first?.subtests.values.first?.subtests.values.first?.subtests.values.map({$0.summaryRef?.id.value})
-        guard let partialRefIds = result else { return accumulator }
+        let summaryIdentifiableObject =  testableSummaryValue.tests.first?.subtests?.first?.subtests?.first?.subtests
+        guard let testSummaryIdentifiableObject = summaryIdentifiableObject else { return accumulator }
+        let partialRefIds = testSummaryIdentifiableObject.compactMap({ $0.summaryRef?.id })
         return accumulator + partialRefIds
     }
 
@@ -64,7 +65,7 @@ func parseTestSummaries(from xcresultFilePath: String) -> [TestSummary] {
     
     for summaryRefId in summaryRefIdValues {
         guard let summaryReferenceId = summaryRefId else { continue }
-        let summary = model(for: TestSummary.self, launchPath: Constants.xcrunExecPath, arguments: arguments + ["--id", summaryReferenceId])
+        let summary = model(for: ActionTestSummary.self, launchPath: Constants.xcrunExecPath, arguments: arguments + ["--id", summaryReferenceId])
         guard let testSummary = summary else { continue }
         testSummaries.append(testSummary)
     }

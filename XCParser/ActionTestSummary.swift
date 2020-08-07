@@ -8,8 +8,8 @@
 import Foundation
 
 // MARK: - TestSummary
-struct TestSummary: Codable {
-    let performanceMetrics: [PerformanceMetricsValue]
+struct ActionTestSummary: Codable {
+    let performanceMetrics: [ActionTestPerformanceMetricSummary]
     let duration: Double
     let identifier, name: String
     let testStatus: String
@@ -30,7 +30,7 @@ struct TestSummary: Codable {
         let rootContainer = try decoder.container(keyedBy: CodingKeys.self)
         
         let perfMetricsContainer = try rootContainer.nestedContainer(keyedBy: PerfMetricsCodingKeys.self, forKey: .performanceMetrics)
-        performanceMetrics = try perfMetricsContainer.decode([PerformanceMetricsValue].self, forKey: .values)
+        performanceMetrics = try perfMetricsContainer.decode([ActionTestPerformanceMetricSummary].self, forKey: .values)
         
         let testStatusContainer = try rootContainer.nestedContainer(keyedBy: DurationCodingKeys.self, forKey: .testStatus)
         testStatus = try testStatusContainer.decode(String.self, forKey: .value)
@@ -46,8 +46,8 @@ struct TestSummary: Codable {
     }
 }
 
-// MARK: - PerformanceMetricsValue
-struct PerformanceMetricsValue: Codable {
+// MARK: - TestPerformanceMetricSummary
+struct ActionTestPerformanceMetricSummary: Codable {
     let displayName, identifier: String
     let maxPercentRegression, maxPercentRelativeStandardDeviation: Double
     let maxRegression, maxStandardDeviation: Double?
