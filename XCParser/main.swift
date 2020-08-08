@@ -11,10 +11,10 @@ typealias Executor = REPLExecutor
 typealias Command = REPLCommand
 
 let executor = Executor(command: Command(launchPath: Constants.xcodebuildExecPath, arguments: Constants.xcodebuildExecArg))
-let resultFile = executor.execTest()
+let resultBundle = executor.execTest()
 
-guard let xcresultFile = resultFile, FileManager.default.fileExists(atPath: xcresultFile) else { print("Couldn't find .xcresult file"); exit(-1) }
-print("xcresultFile: \(xcresultFile)")
+guard let xcresultBundle = resultBundle, FileManager.default.fileExists(atPath: xcresultBundle) else { print("Couldn't find .xcresult bundle"); exit(-1) }
+print("xcresultBundle: \(xcresultBundle)")
 
-let parser = XCParser(xcresultFile: xcresultFile)
+let parser = XCParser(xcresultBundle: xcresultBundle)
 parser.testSummaries().forEach({ dump($0) })

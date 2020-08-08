@@ -38,6 +38,7 @@
 		B53F313524DEB4AF00F78EE7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B53F313724DEB7F200F78EE7 /* REPLExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REPLExecutor.swift; sourceTree = "<group>"; };
 		B53F313924DED28600F78EE7 /* XCParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCParser.swift; sourceTree = "<group>"; };
+		B53F313B24DEE60300F78EE7 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B54F1FA624D5EF6100D5AC00 /* ActionTestSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTestSummary.swift; sourceTree = "<group>"; };
 		B5F77BFC24D5666F00953D63 /* XCParser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = XCParser; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F77BFF24D5666F00953D63 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -82,6 +83,7 @@
 				B53F313724DEB7F200F78EE7 /* REPLExecutor.swift */,
 				B53404B624D6E6CF00B33393 /* REPLCommand.swift */,
 				B5385F0C24D9534700A64CB4 /* REPLBuffer.swift */,
+				B53F313B24DEE60300F78EE7 /* README.md */,
 			);
 			path = XCParser;
 			sourceTree = "<group>";

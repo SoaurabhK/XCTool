@@ -8,19 +8,19 @@
 import Foundation
 
 struct XCParser {
-    let xcresultFile: String
+    let xcresultBundle: String
     
     func testSummaries() -> [ActionTestSummary] {
-        guard let testRefId = self.testRefId() else { return [] }
+        guard let testsRefId = self.testsRefId() else { return [] }
         
-        let summaryRefIds = self.summaryRefIds(from: testRefId)
+        let summaryRefIds = self.summaryRefIds(from: testsRefId)
         guard !summaryRefIds.isEmpty else { return [] }
         
         return self.testSummaries(from: summaryRefIds)
     }
 
-    private func testRefId() -> String? {
-        let arguments = Constants.xcresulttoolArg + [xcresultFile]
+    private func testsRefId() -> String? {
+        let arguments = Constants.xcresulttoolArg + [xcresultBundle]
         
         let executor = Executor(command: Command(launchPath: Constants.xcrunExecPath, arguments: arguments))
         let record = executor.exec(for: ActionsInvocationRecord.self)
@@ -31,8 +31,8 @@ struct XCParser {
         return testRefId
     }
 
-    private func summaryRefIds(from testRefId: String) -> [String] {
-        let arguments = Constants.xcresulttoolArg + [xcresultFile] + [Constants.xcresultIdArg, testRefId]
+    private func summaryRefIds(from testsRefId: String) -> [String] {
+        let arguments = Constants.xcresulttoolArg + [xcresultBundle] + [Constants.xcresultIdArg, testsRefId]
         var summaryRefIds = [String]()
         
         let executor = Executor(command: Command(launchPath: Constants.xcrunExecPath, arguments: arguments))
@@ -53,7 +53,7 @@ struct XCParser {
     }
 
     private func testSummaries(from summaryRefIds: [String]) -> [ActionTestSummary] {
-        let arguments = Constants.xcresulttoolArg + [xcresultFile]
+        let arguments = Constants.xcresulttoolArg + [xcresultBundle]
         var testSummaries = [ActionTestSummary]()
         for summaryRefId in summaryRefIds {
             let executor = Executor(command: Command(launchPath: Constants.xcrunExecPath, arguments: arguments + [Constants.xcresultIdArg, summaryRefId]))
