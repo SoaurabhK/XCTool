@@ -14,6 +14,12 @@ It starts by executing tests using ```xcodebuild``` command. The output ```.xcre
 7.  ```REPLCommand``` struct takes ```launchPath``` and ```arguments``` as input. It has ```run``` methods which launch a ```Process``` with given inputs and attach a ```Pipe``` for reading standardOutput.
 8.   ```REPLBuffer``` struct temporarily holds  ```Data``` buffer as it gets streamed from standardOutput. It has mutating methods to ```append``` data in buffer and get ```outstandingText``` from buffer.
 
+## Commands Used
+1. Execute tests ```xcodebuild -project <project-path> -scheme <scheme-name> -destination <destination(platform, name, OS)> test```
+2. JSON representation of the root object of the result bundle ```xcrun xcresulttool get --format json --path <xcresult-bundle-path>```
+3. Nested object in result bundle can be identified by its reference ```xcrun xcresulttool get --format json --path <xcresult-bundle-path> --id REF```
+4. ```xcresulttool``` provides description of its format using ```xcrun xcresulttool formatDescription```
+
 ## References
 https://developer.apple.com/videos/play/wwdc2019/413/?time=2932<br/>
 https://developer.apple.com/documentation/xcode-release-notes/xcode-11-release-notes<br/>
