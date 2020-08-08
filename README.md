@@ -12,7 +12,7 @@ It starts by executing tests using ```xcodebuild``` command. The output ```.xcre
 5.  ```ActionTestSummary``` struct contains ```performanceMetrics```, ```duration```, ```identifier```, ```name``` and ```testStatus```. We log this data-model corresponding to each performance test.
 6.  ```REPLExecutor``` struct takes ```REPLCommand``` as input and executes that command. It also formats/decode the output as needed.
 7.  ```REPLCommand``` struct takes ```launchPath``` and ```arguments``` as input. It has ```run``` methods which launch a ```Process``` with given inputs and attach a ```Pipe``` for reading standardOutput.
-8.   ```REPLBuffer``` struct temporarily holds  ```Data``` buffer as it gets streamed from standardOutput. It has mutating methods to ```append``` data in buffer and get ```outstandingText```.
+8.   ```REPLBuffer``` struct temporarily holds  ```Data``` buffer as it gets streamed from standardOutput. It has mutating methods to ```append``` data in buffer and get ```outstandingText``` from buffer.
 
 ## References
 https://developer.apple.com/videos/play/wwdc2019/413/?time=2932<br/>
