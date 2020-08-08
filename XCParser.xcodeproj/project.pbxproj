@@ -13,6 +13,7 @@
 		B5385F0D24D9534700A64CB4 /* REPLBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5385F0C24D9534700A64CB4 /* REPLBuffer.swift */; };
 		B53F313624DEB4AF00F78EE7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F313524DEB4AF00F78EE7 /* Constants.swift */; };
 		B53F313824DEB7F200F78EE7 /* REPLExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F313724DEB7F200F78EE7 /* REPLExecutor.swift */; };
+		B53F313A24DED28700F78EE7 /* XCParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F313924DED28600F78EE7 /* XCParser.swift */; };
 		B54F1FA824D5F3F200D5AC00 /* ActionTestSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54F1FA624D5EF6100D5AC00 /* ActionTestSummary.swift */; };
 		B5F77C0024D5666F00953D63 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F77BFF24D5666F00953D63 /* main.swift */; };
 /* End PBXBuildFile section */
@@ -36,6 +37,7 @@
 		B5385F0C24D9534700A64CB4 /* REPLBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REPLBuffer.swift; sourceTree = "<group>"; };
 		B53F313524DEB4AF00F78EE7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B53F313724DEB7F200F78EE7 /* REPLExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REPLExecutor.swift; sourceTree = "<group>"; };
+		B53F313924DED28600F78EE7 /* XCParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCParser.swift; sourceTree = "<group>"; };
 		B54F1FA624D5EF6100D5AC00 /* ActionTestSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTestSummary.swift; sourceTree = "<group>"; };
 		B5F77BFC24D5666F00953D63 /* XCParser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = XCParser; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F77BFF24D5666F00953D63 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				B5F77BFF24D5666F00953D63 /* main.swift */,
+				B53F313924DED28600F78EE7 /* XCParser.swift */,
 				B53F313524DEB4AF00F78EE7 /* Constants.swift */,
 				B537B11124DD903300E0DF06 /* ActionsInvocationRecord.swift */,
 				B537B10F24DD28BD00E0DF06 /* ActionTestPlanRunSummaries.swift */,
@@ -143,6 +146,7 @@
 				B5385F0D24D9534700A64CB4 /* REPLBuffer.swift in Sources */,
 				B5F77C0024D5666F00953D63 /* main.swift in Sources */,
 				B537B11024DD28BD00E0DF06 /* ActionTestPlanRunSummaries.swift in Sources */,
+				B53F313A24DED28700F78EE7 /* XCParser.swift in Sources */,
 				B537B11224DD903300E0DF06 /* ActionsInvocationRecord.swift in Sources */,
 				B53F313824DEB7F200F78EE7 /* REPLExecutor.swift in Sources */,
 				B53F313624DEB4AF00F78EE7 /* Constants.swift in Sources */,

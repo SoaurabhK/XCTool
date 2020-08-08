@@ -8,7 +8,9 @@
 import Foundation
 
 struct REPLExecutor {
-    static func exec<T: Decodable>(command: REPLCommand, for type: T.Type) -> T? {
+    let command: REPLCommand
+    
+    func exec<T: Decodable>(for type: T.Type) -> T? {
         let data = command.run()
         guard data.exitStatus == 0 else { return nil }
         guard let outData = data.result?.data(using: .utf8) else { return nil }
@@ -16,7 +18,7 @@ struct REPLExecutor {
         return result
     }
     
-    static func execTest(_ command: REPLCommand) -> String? {
+    func execTest() -> String? {
         var xcresultPath: String?
         command.run { (lines) in
             lines?.forEach({ print($0) })
