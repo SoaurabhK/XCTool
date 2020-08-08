@@ -6,7 +6,7 @@ It starts by executing tests using ```xcodebuild``` command. The output ```.xcre
 
 ## Types Involved
 1.  ```XCParser``` struct takes path to ```xcresultBundle``` as input and executes ```xcresulttool``` to parse performance test-summaries.
-2.  ```Constants``` enum contains contants for executable paths, command-line arguments for ```xcresulttool``` and ```xcodebuild```, project-path and scheme-name.
+2.  ```Constants``` enum contains constants for executable paths, command-line arguments for ```xcresulttool``` and ```xcodebuild```, project-path and scheme-name.
 3.  ```ActionsInvocationRecord``` struct contains ```actions```, ```metadataRef``` and ```metrics```. We extract ```testsRefId``` from this nested data-model.
 4.  ```ActionTestPlanRunSummaries``` struct contains ```summaries```. We extract ```summaryRefIds``` correspoding to each test from this data-model.
 5.  ```ActionTestSummary``` struct contains ```performanceMetrics```, ```duration```, ```identifier```, ```name``` and ```testStatus```. We log this data-model corresponding to each performance test.
