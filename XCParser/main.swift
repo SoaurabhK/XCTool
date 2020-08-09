@@ -20,7 +20,8 @@ guard let projPath = project, let schemeName = scheme, let runDestination = dest
 }
 
 let executor = Executor(command: Command(launchPath: Constants.xcodebuildExecPath, arguments: ["-project", projPath, "-scheme", schemeName, "-destination", runDestination, "test"]))
-let resultBundle = executor.execTest()
+let isVerbose = argParser.contains(tag: "-verbose")
+let resultBundle = executor.execTest(verbose: isVerbose)
 
 guard let xcresultBundle = resultBundle, FileManager.default.fileExists(atPath: xcresultBundle) else { print("Couldn't find .xcresult bundle"); exit(-1) }
 

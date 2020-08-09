@@ -16,12 +16,17 @@ extension Collection {
 
 struct ArgParser {
     let arguments = CommandLine.arguments
+    
     func value(for tag: String) -> String? {
         let index = arguments.firstIndex(of: tag)?.advanced(by: 1)
         guard let tagIndex = index, let value = arguments[safe: tagIndex] else {
             return nil
         }
         return value
+    }
+    
+    func contains(tag: String) -> Bool {
+        return arguments.contains(tag)
     }
 }
 

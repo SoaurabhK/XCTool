@@ -18,10 +18,10 @@ struct REPLExecutor {
         return result
     }
     
-    func execTest() -> String? {
+    func execTest(verbose isVerbose: Bool = false) -> String? {
         var xcresultPath: String?
         command.run { (lines) in
-            lines?.forEach({ print($0) })
+            if isVerbose { lines?.forEach{ print($0) } }
             xcresultPath = lines?.first(where: { $0.hasSuffix(".xcresult")})?.trimmingCharacters(in: CharacterSet(charactersIn: "\t"))
         }
         return xcresultPath
