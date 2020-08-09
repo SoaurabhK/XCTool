@@ -20,6 +20,10 @@ It starts by executing tests using ```xcodebuild``` command. The output ```.xcre
 3. Nested object in result bundle can be identified by its reference ```xcrun xcresulttool get --format json --path <xcresult-bundle-path> --id REF```
 4. ```xcresulttool``` provides description of its format using ```xcrun xcresulttool formatDescription```
 
+## Future Support
+Automatically run tests on a connected device:<br/> https://github.com/fastlane/fastlane/blob/master/fastlane_core/lib/fastlane_core/device_manager.rb#L68<br/>
+http://www.maytro.com/2014/05/11/using-xcodebuild-to-automatically-run-tests-on-connected-device.html
+
 ## References
 https://developer.apple.com/videos/play/wwdc2019/413/?time=2932<br/>
 https://developer.apple.com/documentation/xcode-release-notes/xcode-11-release-notes<br/>
