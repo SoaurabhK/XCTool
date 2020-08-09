@@ -19,7 +19,7 @@ guard let projPath = project, let schemeName = scheme, let runDestination = dest
     exit(-1)
 }
 
-let executor = Executor(command: Command(launchPath: Constants.xcodebuildExecPath, arguments: ["-project", projPath, "-scheme", schemeName, "-destination", runDestination] + Constants.xcodebuildExecArg))
+let executor = Executor(command: Command(launchPath: Constants.xcodebuildExecPath, arguments: ["-project", projPath, "-scheme", schemeName, "-destination", runDestination, "test"]))
 let resultBundle = executor.execTest()
 
 guard let xcresultBundle = resultBundle, FileManager.default.fileExists(atPath: xcresultBundle) else { print("Couldn't find .xcresult bundle"); exit(-1) }
