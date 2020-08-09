@@ -12,8 +12,6 @@ enum Constants {
     static let xcodebuildExecPath = "/Applications/Xcode-beta.app/Contents/Developer/usr/bin/xcodebuild"
     static let xcresulttoolArg = ["xcresulttool", "get", "--format", "json", "--path"]
     static let xcresultIdArg = "--id"
-    // user, device and project specific constants
-    static let schemeName = "PerformanceTesting"
-    static let xcodeprojPath = "/Users/soaurabhkakkar/PerformanceTesting/PerformanceTesting.xcodeproj"
-    static let xcodebuildExecArg = ["-project", xcodeprojPath, "-scheme", schemeName, "-destination", "platform=iOS Simulator,name=iPhone 11 Pro Max,OS=14.0", "test"]
+    // device specific constants
+    static let xcodebuildExecArg = ["-destination", "platform=iOS Simulator,name=iPhone 11 Pro Max,OS=14.0", "test"]
 }
