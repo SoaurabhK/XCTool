@@ -53,13 +53,15 @@ struct REPLCommand {
     }
     
     private func launchProcess(at launchPath: String, with arguments: [String]) -> (task: Process, pipe: Pipe) {
-        let task = Process()
-        task.launchPath = launchPath
-        task.arguments = arguments
+        return autoreleasepool { () -> (Process, Pipe) in
+            let task = Process()
+            task.executableURL = URL(fileURLWithPath: launchPath)
+            task.arguments = arguments
 
-        let pipe = Pipe()
-        task.standardOutput = pipe
-        task.launch()
-        return (task, pipe)
+            let pipe = Pipe()
+            task.standardOutput = pipe
+            try? task.run()
+            return (task, pipe)
+        }
     }
 }
