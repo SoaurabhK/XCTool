@@ -13,9 +13,9 @@ struct REPLCommand {
     
     func run() -> (result: Data?, exitStatus: Int32) {
         let (task, pipe) = launchProcess(at: launchPath, with: arguments)
-
-        let outdata = pipe.fileHandleForReading.readDataToEndOfFile()
-        
+        let outdata = autoreleasepool { () -> Data? in
+            pipe.fileHandleForReading.readDataToEndOfFile()
+        }
         task.waitUntilExit()
         let status = task.terminationStatus
 

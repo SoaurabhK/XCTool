@@ -14,7 +14,9 @@ struct REPLExecutor {
         let data = command.run()
         guard data.exitStatus == 0 else { return nil }
         guard let outData = data.result else { return nil }
-        let result = try? JSONDecoder().decode(T.self, from: outData)
+        let result = autoreleasepool { () -> T? in
+            try? JSONDecoder().decode(T.self, from: outData)
+        }
         return result
     }
     
