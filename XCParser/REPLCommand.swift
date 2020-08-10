@@ -46,9 +46,9 @@ struct REPLCommand {
         }
         
         task.waitUntilExit()
-        task.terminationHandler = { process in
-            group.wait()
-        }
+        
+        // readabilityHandler is called on background queue, so it's safe to block/wait here.
+        group.wait()
         
         let status = task.terminationStatus
         return status
