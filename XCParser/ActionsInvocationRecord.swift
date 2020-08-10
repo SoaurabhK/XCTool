@@ -37,7 +37,7 @@ struct ActionsInvocationRecord: Codable {
 struct ActionRecord: Codable {
     let actionResult: ActionResult
     let buildResult: BuildResult
-    let startedTime, endedTime: Date
+    let startedTime, endedTime: String
     let runDestination: ActionRunDestinationRecord
     let schemeCommandName, schemeTaskName: String
     let title: String?
@@ -52,14 +52,11 @@ struct ActionRecord: Codable {
     init(from decoder: Decoder) throws {
         let rootContainer = try decoder.container(keyedBy: CodingKeys.self)
         
-        let dateFormatter = ISO8601DateFormatter()
-        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        
         let startedTimeContainer = try rootContainer.nestedContainer(keyedBy: IDCodingKeys.self, forKey: .startedTime)
-        startedTime = dateFormatter.date(from: try startedTimeContainer.decode(String.self, forKey: .value)) ?? Date()
+        startedTime = try startedTimeContainer.decode(String.self, forKey: .value)
         
         let endedTimeContainer = try rootContainer.nestedContainer(keyedBy: IDCodingKeys.self, forKey: .endedTime)
-        endedTime = dateFormatter.date(from: try endedTimeContainer.decode(String.self, forKey: .value)) ?? Date()
+        endedTime = try endedTimeContainer.decode(String.self, forKey: .value)
         
         actionResult = try rootContainer.decode(ActionResult.self, forKey: .actionResult)
         buildResult = try rootContainer.decode(BuildResult.self, forKey: .buildResult)
