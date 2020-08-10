@@ -11,17 +11,15 @@ struct REPLCommand {
     let launchPath: String
     let arguments: [String]
     
-    func run() -> (result: String?, exitStatus: Int32) {
+    func run() -> (result: Data?, exitStatus: Int32) {
         let (task, pipe) = launchProcess(at: launchPath, with: arguments)
 
         let outdata = pipe.fileHandleForReading.readDataToEndOfFile()
-        var output = String(data: outdata, encoding: String.Encoding.utf8)
-        output = output?.trimmingCharacters(in: .newlines)
         
         task.waitUntilExit()
         let status = task.terminationStatus
 
-        return (output, status)
+        return (outdata, status)
     }
 
     @discardableResult

@@ -13,7 +13,7 @@ struct REPLExecutor {
     func exec<T: Decodable>(for type: T.Type) -> T? {
         let data = command.run()
         guard data.exitStatus == 0 else { return nil }
-        guard let outData = data.result?.data(using: .utf8) else { return nil }
+        guard let outData = data.result else { return nil }
         let result = try? JSONDecoder().decode(T.self, from: outData)
         return result
     }
