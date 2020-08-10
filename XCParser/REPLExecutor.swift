@@ -22,8 +22,8 @@ struct REPLExecutor {
         var xcresultPath: String?
         command.run { (lines) in
             if isVerbose { lines?.forEach{ print($0) } }
-            xcresultPath = lines?.first(where: { $0.hasSuffix(".xcresult")})?.trimmingCharacters(in: CharacterSet(charactersIn: "\t"))
+            xcresultPath = lines?.first(where: { $0.hasSuffix(".xcresult")})
         }
-        return xcresultPath
+        return xcresultPath?.trimmingCharacters(in: CharacterSet(charactersIn: "\t"))
     }
 }
