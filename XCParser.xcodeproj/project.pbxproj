@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B5141A5D24E477050040310E /* ResultBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5141A5C24E477050040310E /* ResultBundle.swift */; };
 		B53404B724D6E6CF00B33393 /* REPLCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53404B624D6E6CF00B33393 /* REPLCommand.swift */; };
 		B537B11024DD28BD00E0DF06 /* ActionTestPlanRunSummaries.swift in Sources */ = {isa = PBXBuildFile; fileRef = B537B10F24DD28BD00E0DF06 /* ActionTestPlanRunSummaries.swift */; };
 		B537B11224DD903300E0DF06 /* ActionsInvocationRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B537B11124DD903300E0DF06 /* ActionsInvocationRecord.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B5141A5C24E477050040310E /* ResultBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultBundle.swift; sourceTree = "<group>"; };
 		B53404B624D6E6CF00B33393 /* REPLCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REPLCommand.swift; sourceTree = "<group>"; };
 		B537B10F24DD28BD00E0DF06 /* ActionTestPlanRunSummaries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTestPlanRunSummaries.swift; sourceTree = "<group>"; };
 		B537B11124DD903300E0DF06 /* ActionsInvocationRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsInvocationRecord.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				B5F77BFF24D5666F00953D63 /* main.swift */,
 				B53F313924DED28600F78EE7 /* XCParser.swift */,
 				B53F313C24DFED7D00F78EE7 /* ArgParser.swift */,
+				B5141A5C24E477050040310E /* ResultBundle.swift */,
 				B53F313524DEB4AF00F78EE7 /* Constants.swift */,
 				B537B11124DD903300E0DF06 /* ActionsInvocationRecord.swift */,
 				B537B10F24DD28BD00E0DF06 /* ActionTestPlanRunSummaries.swift */,
@@ -156,6 +159,7 @@
 				B53F313624DEB4AF00F78EE7 /* Constants.swift in Sources */,
 				B53404B724D6E6CF00B33393 /* REPLCommand.swift in Sources */,
 				B54F1FA824D5F3F200D5AC00 /* ActionTestSummary.swift in Sources */,
+				B5141A5D24E477050040310E /* ResultBundle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +287,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8MLCLBT8FW;
 				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sk.XCParser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -294,6 +299,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8MLCLBT8FW;
 				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sk.XCParser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};

@@ -19,11 +19,18 @@ guard let projPath = project, let schemeName = scheme, let runDestination = dest
     exit(-1)
 }
 
-let executor = Executor(command: Command(launchPath: Constants.xcodebuildExecPath, arguments: ["-project", projPath, "-scheme", schemeName, "-destination", runDestination, "test"]))
-let isVerbose = argParser.contains(tag: "-verbose")
-let resultBundle = executor.execTest(verbose: isVerbose)
+let bundle = ResultBundle(xcodeprojPath: projPath)
+guard let xcresultBundle = bundle.projRelativePath else {
+    print("Couldn't get a valid .xcresult bundlePath")
+    exit(-1)
+}
 
-guard let xcresultBundle = resultBundle, FileManager.default.fileExists(atPath: xcresultBundle) else { print("Couldn't find .xcresult bundle"); exit(-1) }
+let executor: Executor = Executor(command: Command(launchPath: Constants.xcodebuildExecPath, arguments: ["test", "-project", projPath, "-scheme", schemeName, "-destination", runDestination, "-resultBundlePath", xcresultBundle]))
+
+let isVerbose = argParser.contains(tag: "-verbose")
+let testStatus = executor.execTest(verbose: isVerbose)
+
+guard testStatus == EXIT_SUCCESS else { print("Test Execution Failed!"); exit(-1) }
 
 let parser = XCParser(xcresultBundle: xcresultBundle)
 parser.testSummaries().forEach({ dump($0) })

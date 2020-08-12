@@ -20,12 +20,9 @@ struct REPLExecutor {
         return result
     }
     
-    func execTest(verbose isVerbose: Bool = false) -> String? {
-        var xcresultPath: String?
+    func execTest(verbose isVerbose: Bool = false) -> Int32 {
         command.run { (lines) in
             if isVerbose { lines?.forEach{ print($0) } }
-            xcresultPath = lines?.first(where: { $0.hasSuffix(".xcresult")})
         }
-        return xcresultPath?.trimmingCharacters(in: CharacterSet(charactersIn: "\t"))
     }
 }
