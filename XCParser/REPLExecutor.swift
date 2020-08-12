@@ -12,7 +12,7 @@ struct REPLExecutor {
     
     func exec<T: Decodable>(for type: T.Type) -> T? {
         let data = command.run()
-        guard data.exitStatus == 0 else { return nil }
+        guard data.exitStatus == EXIT_SUCCESS else { return nil }
         guard let outData = data.result else { return nil }
         let result = autoreleasepool { () -> T? in
             try? JSONDecoder().decode(T.self, from: outData)
