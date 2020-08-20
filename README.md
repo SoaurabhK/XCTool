@@ -27,7 +27,7 @@ It starts by executing tests using ```xcodebuild``` command. The output ```.xcre
 xcresulttool version 17017, format version 3.26 (current)
 2.  ```$ xcodebuild -version``` <br/>
 Xcode 12.0<br/>
-Build version 12A8179i
+Build version 12A8189h
 
 ## Future Support
 Automatically run tests on a connected device:<br/> https://github.com/fastlane/fastlane/blob/master/fastlane_core/lib/fastlane_core/device_manager.rb#L68<br/>
