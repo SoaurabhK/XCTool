@@ -22,4 +22,15 @@ class ResultBundle {
         let resultBundlePath = resultBundlesDir.appendingPathComponent("ResultBundle_\(Int(Date().timeIntervalSinceReferenceDate)).xcresult").path
         return resultBundlePath
     }()
+    
+    func retryPath(forIteration iteration: Int) -> String? {
+        guard let projRelativePath = self.projRelativePath else {
+            return nil
+        }
+        let projectRelativeURL = URL(fileURLWithPath: projRelativePath)
+        let bundleName = String(projectRelativeURL.lastPathComponent.prefix { $0 != "." })
+        let retryBundleName = bundleName.appending("_Retry\(iteration).xcresult")
+        let retryBundlePath = projectRelativeURL.deletingLastPathComponent().appendingPathComponent(retryBundleName).path
+        return retryBundlePath
+    }
 }

@@ -7,10 +7,28 @@
 
 import Foundation
 
+// MARK: - Final TestSummary
+struct TestSummary {
+    let performanceMetrics: [ActionTestPerformanceMetricSummary]?
+    let duration: Double?
+    let identifier, name: String
+    let testStatus: String
+    let targetName: String
+    
+    init(actionTestSummary: ActionTestSummary, targetName: String) {
+        self.performanceMetrics = actionTestSummary.performanceMetrics
+        self.duration = actionTestSummary.duration
+        self.identifier = actionTestSummary.identifier
+        self.name = actionTestSummary.name
+        self.testStatus = actionTestSummary.testStatus
+        self.targetName = targetName
+    }
+}
+
 // MARK: - TestSummary
 struct ActionTestSummary: Codable {
-    let performanceMetrics: [ActionTestPerformanceMetricSummary]
-    let duration: Double
+    let performanceMetrics: [ActionTestPerformanceMetricSummary]?
+    let duration: Double?
     let identifier, name: String
     let testStatus: String
     
@@ -29,8 +47,8 @@ struct ActionTestSummary: Codable {
     init(from decoder: Decoder) throws {
         let rootContainer = try decoder.container(keyedBy: CodingKeys.self)
         
-        let perfMetricsContainer = try rootContainer.nestedContainer(keyedBy: PerfMetricsCodingKeys.self, forKey: .performanceMetrics)
-        performanceMetrics = try perfMetricsContainer.decode([ActionTestPerformanceMetricSummary].self, forKey: .values)
+        let perfMetricsContainer = try? rootContainer.nestedContainer(keyedBy: PerfMetricsCodingKeys.self, forKey: .performanceMetrics)
+        performanceMetrics = try? perfMetricsContainer?.decode([ActionTestPerformanceMetricSummary]?.self, forKey: .values)
         
         let testStatusContainer = try rootContainer.nestedContainer(keyedBy: DurationCodingKeys.self, forKey: .testStatus)
         testStatus = try testStatusContainer.decode(String.self, forKey: .value)
@@ -41,8 +59,8 @@ struct ActionTestSummary: Codable {
         let nameContainer = try rootContainer.nestedContainer(keyedBy: DurationCodingKeys.self, forKey: .name)
         name = try nameContainer.decode(String.self, forKey: .value)
         
-        let durationContainer = try rootContainer.nestedContainer(keyedBy: DurationCodingKeys.self, forKey: .duration)
-        duration = Double(try durationContainer.decode(String.self, forKey: .value)) ?? 0.0
+        let durationContainer = try? rootContainer.nestedContainer(keyedBy: DurationCodingKeys.self, forKey: .duration)
+        duration = try? durationContainer?.decode(String?.self, forKey: .value).flatMap(Double.init)
     }
 }
 

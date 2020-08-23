@@ -55,6 +55,12 @@ struct ActionTestPlanRunSummary: Codable {
     }
 }
 
+// MARK:- TargetSummaryRef
+struct TargetSummaryRef {
+    let targetName: String
+    let id: String //summaryRefId
+}
+
 // MARK: - TestableSummary
 struct ActionTestableSummary: Codable {
     let diagnosticsDirectoryName, name, projectRelativePath, targetName: String
@@ -99,7 +105,7 @@ struct ActionTestableSummary: Codable {
 
 // MARK: - TestSummaryIdentifiableObject
 class ActionTestSummaryIdentifiableObject: Codable {
-    let duration: Double
+    let duration: Double?
     let identifier, name: String
     let subtests: [ActionTestSummaryIdentifiableObject]?
     let summaryRef: Reference?
@@ -126,8 +132,8 @@ class ActionTestSummaryIdentifiableObject: Codable {
         let identifierContainer = try rootContainer.nestedContainer(keyedBy: NameCodingKeys.self, forKey: .identifier)
         identifier = try identifierContainer.decode(String.self, forKey: .value)
         
-        let durationContainer = try rootContainer.nestedContainer(keyedBy: NameCodingKeys.self, forKey: .duration)
-        duration = Double(try durationContainer.decode(String.self, forKey: .value)) ?? 0.0
+        let durationContainer = try? rootContainer.nestedContainer(keyedBy: NameCodingKeys.self, forKey: .duration)
+        duration = try? durationContainer?.decode(String?.self, forKey: .value).flatMap(Double.init)
         
         let testStatusContainer = try? rootContainer.nestedContainer(keyedBy: NameCodingKeys.self, forKey: .testStatus)
         testStatus = try? testStatusContainer?.decode(String?.self, forKey: .value)

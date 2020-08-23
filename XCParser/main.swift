@@ -30,7 +30,50 @@ let executor: Executor = Executor(command: Command(launchPath: Constants.xcodebu
 let isVerbose = argParser.contains(tag: "-verbose")
 let testStatus = executor.execTest(verbose: isVerbose)
 
-guard testStatus == EXIT_SUCCESS else { print("Test Execution Failed!"); exit(-1) }
-
 let parser = XCParser(xcresultBundle: xcresultBundle)
-parser.testSummaries().forEach({ dump($0) })
+let testSummaries = parser.testSummaries()
+
+if testStatus == EXIT_SUCCESS {
+    testSummaries.forEach{ dump($0) }
+} else {
+    print("Test execution failed, retrying failed tests!")
+    let (successTests, failedTests) = testSummaries.reduce(([TestSummary](), [TestSummary]())) { (accumulator, testSummary) -> ([TestSummary], [TestSummary]) in
+        let (success, fail) = accumulator
+        if testSummary.testStatus == "Success" {
+            return (success + [testSummary], fail)
+        } else {
+            return (success, fail + [testSummary])
+        }
+    }
+    let retryResult = retryFailedTests(failedTests, maxTries: 3)
+    guard retryResult.status == EXIT_SUCCESS else {
+        print("FATAL: Retry test execution failed, please investigate!")
+        exit(-1)
+    }
+    let finalTestSummaries = successTests + retryResult.testSummaries
+    finalTestSummaries.forEach{ dump($0) }
+}
+
+func retryFailedTests(_ tests: [TestSummary], maxTries: Int) -> (status: Int32, testSummaries: [TestSummary]) {
+    for iteration in 1...maxTries {
+        guard let retryBundlePath = bundle.retryPath(forIteration: iteration) else { continue }
+        
+        let failedTestsArgs = tests.map { testSummary -> String in
+            let testingOption = String("\(testSummary.targetName)/\(testSummary.identifier)")
+            return "-only-testing:\(testingOption)"
+        }
+        
+        let executor: Executor = Executor(command: Command(launchPath: Constants.xcodebuildExecPath, arguments: ["test", "-project", projPath, "-scheme", schemeName, "-destination", runDestination, "-resultBundlePath", retryBundlePath] + failedTestsArgs))
+        let testStatus = executor.execTest(verbose: isVerbose)
+        
+        guard testStatus == EXIT_SUCCESS else {
+            print("Test execution failed for retry-iteration: \(iteration) with result-bundle: \(retryBundlePath)")
+            continue
+        }
+        
+        let parser = XCParser(xcresultBundle: retryBundlePath)
+        let testSummaries = parser.testSummaries()
+        return (testStatus, testSummaries)
+    }
+    return (EXIT_FAILURE, [])
+}

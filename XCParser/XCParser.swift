@@ -10,16 +10,16 @@ import Foundation
 struct XCParser {
     let xcresultBundle: String
     
-    func testSummaries() -> [ActionTestSummary] {
+    func testSummaries() -> [TestSummary] {
         let testsRefIds = self.testsRefIds()
         guard !testsRefIds.isEmpty else { return [] }
         
-        let summaryRefIds = testsRefIds.reduce([String]()) { (accumulator, testsRefId) -> [String] in
-            return accumulator + self.summaryRefIds(from: testsRefId)
+        let targetSummaryRefs = testsRefIds.reduce([TargetSummaryRef]()) { (accumulator, testsRefId) -> [TargetSummaryRef] in
+            return accumulator + self.targetSummaryRefs(from: testsRefId)
         }
-        guard !summaryRefIds.isEmpty else { return [] }
+        guard !targetSummaryRefs.isEmpty else { return [] }
         
-        return self.testSummaries(from: summaryRefIds)
+        return self.testSummaries(from: targetSummaryRefs)
     }
 
     private func testsRefIds() -> [String] {
@@ -34,23 +34,27 @@ struct XCParser {
         return testRefIds
     }
 
-    private func summaryRefIds(from testsRefId: String) -> [String] {
+    private func targetSummaryRefs(from testsRefId: String) -> [TargetSummaryRef] {
         let arguments = Constants.xcresulttoolArg + [xcresultBundle] + [Constants.xcresultIdArg, testsRefId]
-        var summaryRefIds = [String]()
+        var targetSummaryRefs = [TargetSummaryRef]()
         
         let executor = Executor(command: Command(launchPath: Constants.xcrunExecPath, arguments: arguments))
         let runSummaries = executor.exec(for: ActionTestPlanRunSummaries.self)
         
-        guard let testPlanRunSummaries = runSummaries else { return summaryRefIds }
+        guard let testPlanRunSummaries = runSummaries else { return targetSummaryRefs }
         
         let testableSummaries = testPlanRunSummaries.summaries.flatMap{ $0.testableSummaries }
 
-        summaryRefIds = testableSummaries.reduce([String]()) { (accumulator, testableSummary) -> [String] in
+        targetSummaryRefs = testableSummaries.reduce([TargetSummaryRef]()) { (accumulator, testableSummary) -> [TargetSummaryRef] in
+            let targetName = testableSummary.targetName
             let testSummaryIdentifiableObjects = self.testSummaryIdentifiableObjects(for: testableSummary.tests)
-            let partialRefIds = testSummaryIdentifiableObjects.compactMap({ $0.summaryRef?.id })
+            let partialRefIds = testSummaryIdentifiableObjects.compactMap { (summaryIdentifiableObject) -> TargetSummaryRef? in
+                guard let summaryRefId = summaryIdentifiableObject.summaryRef?.id else { return nil }
+                return TargetSummaryRef(targetName: targetName, id: summaryRefId)
+            }
             return accumulator + partialRefIds
         }
-        return summaryRefIds
+        return targetSummaryRefs
     }
 
     private func testSummaryIdentifiableObjects(for identifiableObjects: [ActionTestSummaryIdentifiableObject]) -> [ActionTestSummaryIdentifiableObject] {
@@ -66,14 +70,14 @@ struct XCParser {
         return summaryIdentifiableObjects
     }
 
-    private func testSummaries(from summaryRefIds: [String]) -> [ActionTestSummary] {
+    private func testSummaries(from targetSummaryRefs: [TargetSummaryRef]) -> [TestSummary] {
         let arguments = Constants.xcresulttoolArg + [xcresultBundle]
-        var testSummaries = [ActionTestSummary]()
-        for summaryRefId in summaryRefIds {
-            let executor = Executor(command: Command(launchPath: Constants.xcrunExecPath, arguments: arguments + [Constants.xcresultIdArg, summaryRefId]))
+        var testSummaries = [TestSummary]()
+        for targetSummaryRef in targetSummaryRefs {
+            let executor = Executor(command: Command(launchPath: Constants.xcrunExecPath, arguments: arguments + [Constants.xcresultIdArg, targetSummaryRef.id]))
             let summary = executor.exec(for: ActionTestSummary.self)
             guard let testSummary = summary else { continue }
-            testSummaries.append(testSummary)
+            testSummaries.append(TestSummary(actionTestSummary: testSummary, targetName: targetSummaryRef.targetName))
         }
         return testSummaries
     }
