@@ -20,9 +20,9 @@ struct REPLExecutor {
         return result
     }
     
-    func execTest(verbose isVerbose: Bool = false) -> Int32 {
+    func exec(outputChunk: @escaping ([String]?) -> Void) -> Int32 {
         command.run { (lines) in
-            if isVerbose { lines?.forEach{ print($0) } }
+            outputChunk(lines)
         }
     }
 }

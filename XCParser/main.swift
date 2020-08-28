@@ -4,6 +4,7 @@
 //
 //  Created by Soaurabh Kakkar on 01/08/20.
 //
+// NOTE: We can also split the workflow of building and testing and if we want to pass build artifacts & xctestrun file to other machines then we can get BUILD_DIR from project's build-settings: https://stackoverflow.com/a/47019252
 
 import Foundation
 
@@ -27,8 +28,7 @@ guard let xcresultBundle = bundle.projRelativePath else {
 
 let executor: Executor = Executor(command: Command(launchPath: Constants.xcodebuildExecPath, arguments: ["test", "-project", projPath, "-scheme", schemeName, "-destination", runDestination, "-resultBundlePath", xcresultBundle]))
 
-let isVerbose = argParser.contains(tag: "-verbose")
-let testStatus = executor.execTest(verbose: isVerbose)
+let testStatus = executor.exec{ $0?.forEach { print($0) } }
 
 let parser = XCParser(xcresultBundle: xcresultBundle)
 let testSummaries = parser.testSummaries()
@@ -64,7 +64,7 @@ func retryFailedTests(_ tests: [TestSummary], maxTries: Int) -> (status: Int32, 
         }
         
         let executor: Executor = Executor(command: Command(launchPath: Constants.xcodebuildExecPath, arguments: ["test", "-project", projPath, "-scheme", schemeName, "-destination", runDestination, "-resultBundlePath", retryBundlePath] + failedTestsArgs))
-        let testStatus = executor.execTest(verbose: isVerbose)
+        let testStatus = executor.exec{ $0?.forEach { print($0) } }
         
         guard testStatus == EXIT_SUCCESS else {
             print("Test execution failed for retry-iteration: \(iteration) with result-bundle: \(retryBundlePath)")
