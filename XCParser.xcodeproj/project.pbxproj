@@ -18,6 +18,7 @@
 		B53F313D24DFED7D00F78EE7 /* ArgParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F313C24DFED7D00F78EE7 /* ArgParser.swift */; };
 		B54F1FA824D5F3F200D5AC00 /* ActionTestSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54F1FA624D5EF6100D5AC00 /* ActionTestSummary.swift */; };
 		B5F77C0024D5666F00953D63 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F77BFF24D5666F00953D63 /* main.swift */; };
+		B5FFE64B24F938E40011AEE8 /* TestFailure.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FFE64A24F938E40011AEE8 /* TestFailure.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +46,7 @@
 		B54F1FA624D5EF6100D5AC00 /* ActionTestSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTestSummary.swift; sourceTree = "<group>"; };
 		B5F77BFC24D5666F00953D63 /* XCParser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = XCParser; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F77BFF24D5666F00953D63 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		B5FFE64A24F938E40011AEE8 /* TestFailure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFailure.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				B53F313724DEB7F200F78EE7 /* REPLExecutor.swift */,
 				B53404B624D6E6CF00B33393 /* REPLCommand.swift */,
 				B5385F0C24D9534700A64CB4 /* REPLBuffer.swift */,
+				B5FFE64A24F938E40011AEE8 /* TestFailure.swift */,
 			);
 			path = XCParser;
 			sourceTree = "<group>";
@@ -152,6 +155,7 @@
 				B5385F0D24D9534700A64CB4 /* REPLBuffer.swift in Sources */,
 				B53F313D24DFED7D00F78EE7 /* ArgParser.swift in Sources */,
 				B5F77C0024D5666F00953D63 /* main.swift in Sources */,
+				B5FFE64B24F938E40011AEE8 /* TestFailure.swift in Sources */,
 				B537B11024DD28BD00E0DF06 /* ActionTestPlanRunSummaries.swift in Sources */,
 				B53F313A24DED28700F78EE7 /* XCParser.swift in Sources */,
 				B537B11224DD903300E0DF06 /* ActionsInvocationRecord.swift in Sources */,

@@ -15,9 +15,9 @@ extension Collection {
 }
 
 struct ArgParser {
-    let arguments = CommandLine.arguments
+    private static let arguments = CommandLine.arguments
     
-    func value(for tag: String) -> String? {
+    static func value(for tag: String) -> String? {
         let index = arguments.firstIndex(of: tag)?.advanced(by: 1)
         guard let tagIndex = index, let value = arguments[safe: tagIndex] else {
             return nil
@@ -25,10 +25,28 @@ struct ArgParser {
         return value
     }
     
-    func contains(tag: String) -> Bool {
+    static func contains(tag: String) -> Bool {
         return arguments.contains(tag)
     }
 }
 
+struct LaunchArgs {
+    let project: String
+    let scheme: String
+    let destination: String
+}
+
+extension ArgParser {
+    static var launchArgs: LaunchArgs? {
+        let project = Self.value(for: "-project")
+        let scheme = Self.value(for: "-scheme")
+        let destination = Self.value(for: "-destination")
+        
+        guard let projPath = project, let schemeName = scheme, let runDestination = destination else {
+            return nil
+        }
+        return LaunchArgs(project: projPath, scheme: schemeName, destination: runDestination)
+    }
+}
 
 

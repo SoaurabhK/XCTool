@@ -12,4 +12,5 @@ enum Constants {
     static let xcodebuildExecPath = "/Applications/Xcode-beta.app/Contents/Developer/usr/bin/xcodebuild"
     static let xcresulttoolArg = ["xcresulttool", "get", "--format", "json", "--path"]
     static let xcresultIdArg = "--id"
+    static let maxRetries = 3
 }
