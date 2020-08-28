@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B5F77BFB24D5666F00953D63"
-               BuildableName = "XCParser"
-               BlueprintName = "XCParser"
-               ReferencedContainer = "container:XCParser.xcodeproj">
+               BuildableName = "XCTool"
+               BlueprintName = "XCTool"
+               ReferencedContainer = "container:XCTool.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B5F77BFB24D5666F00953D63"
-            BuildableName = "XCParser"
-            BlueprintName = "XCParser"
-            ReferencedContainer = "container:XCParser.xcodeproj">
+            BuildableName = "XCTool"
+            BlueprintName = "XCTool"
+            ReferencedContainer = "container:XCTool.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
@@ -88,9 +88,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B5F77BFB24D5666F00953D63"
-            BuildableName = "XCParser"
-            BlueprintName = "XCParser"
-            ReferencedContainer = "container:XCParser.xcodeproj">
+            BuildableName = "XCTool"
+            BlueprintName = "XCTool"
+            ReferencedContainer = "container:XCTool.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

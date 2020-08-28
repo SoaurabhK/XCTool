@@ -1,6 +1,6 @@
 //
 //  StreamReader.swift
-//  XCParser
+//  XCTool
 //
 //  Created by Soaurabh Kakkar on 04/08/20.
 //

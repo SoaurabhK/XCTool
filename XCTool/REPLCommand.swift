@@ -1,6 +1,6 @@
 //
 //  RunCommand.swift
-//  XCParser
+//  XCTool
 //
 //  Created by Soaurabh Kakkar on 02/08/20.
 //

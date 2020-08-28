@@ -1,13 +1,13 @@
 //
 //  TestSummaries.swift
-//  XCParser
+//  XCTool
 //
 //  Created by Soaurabh Kakkar on 08/08/20.
 //
 
 import Foundation
 
-struct XCParser {
+struct XCTool {
     let xcresultBundle: String
     
     func testSummaries() -> [TestSummary] {

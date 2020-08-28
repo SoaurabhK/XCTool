@@ -14,7 +14,7 @@
 		B5385F0D24D9534700A64CB4 /* REPLBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5385F0C24D9534700A64CB4 /* REPLBuffer.swift */; };
 		B53F313624DEB4AF00F78EE7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F313524DEB4AF00F78EE7 /* Constants.swift */; };
 		B53F313824DEB7F200F78EE7 /* REPLExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F313724DEB7F200F78EE7 /* REPLExecutor.swift */; };
-		B53F313A24DED28700F78EE7 /* XCParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F313924DED28600F78EE7 /* XCParser.swift */; };
+		B53F313A24DED28700F78EE7 /* XCTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F313924DED28600F78EE7 /* XCTool.swift */; };
 		B53F313D24DFED7D00F78EE7 /* ArgParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F313C24DFED7D00F78EE7 /* ArgParser.swift */; };
 		B54F1FA824D5F3F200D5AC00 /* ActionTestSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54F1FA624D5EF6100D5AC00 /* ActionTestSummary.swift */; };
 		B5F77C0024D5666F00953D63 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F77BFF24D5666F00953D63 /* main.swift */; };
@@ -41,10 +41,10 @@
 		B5385F0C24D9534700A64CB4 /* REPLBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REPLBuffer.swift; sourceTree = "<group>"; };
 		B53F313524DEB4AF00F78EE7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B53F313724DEB7F200F78EE7 /* REPLExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REPLExecutor.swift; sourceTree = "<group>"; };
-		B53F313924DED28600F78EE7 /* XCParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCParser.swift; sourceTree = "<group>"; };
+		B53F313924DED28600F78EE7 /* XCTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTool.swift; sourceTree = "<group>"; };
 		B53F313C24DFED7D00F78EE7 /* ArgParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgParser.swift; sourceTree = "<group>"; };
 		B54F1FA624D5EF6100D5AC00 /* ActionTestSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTestSummary.swift; sourceTree = "<group>"; };
-		B5F77BFC24D5666F00953D63 /* XCParser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = XCParser; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5F77BFC24D5666F00953D63 /* XCTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = XCTool; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F77BFF24D5666F00953D63 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		B5FFE64A24F938E40011AEE8 /* TestFailure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFailure.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,7 +63,7 @@
 		B5F77BF324D5666F00953D63 = {
 			isa = PBXGroup;
 			children = (
-				B5F77BFE24D5666F00953D63 /* XCParser */,
+				B5F77BFE24D5666F00953D63 /* XCTool */,
 				B5F77BFD24D5666F00953D63 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -71,16 +71,16 @@
 		B5F77BFD24D5666F00953D63 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B5F77BFC24D5666F00953D63 /* XCParser */,
+				B5F77BFC24D5666F00953D63 /* XCTool */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B5F77BFE24D5666F00953D63 /* XCParser */ = {
+		B5F77BFE24D5666F00953D63 /* XCTool */ = {
 			isa = PBXGroup;
 			children = (
 				B5F77BFF24D5666F00953D63 /* main.swift */,
-				B53F313924DED28600F78EE7 /* XCParser.swift */,
+				B53F313924DED28600F78EE7 /* XCTool.swift */,
 				B53F313C24DFED7D00F78EE7 /* ArgParser.swift */,
 				B5141A5C24E477050040310E /* ResultBundle.swift */,
 				B53F313524DEB4AF00F78EE7 /* Constants.swift */,
@@ -92,15 +92,15 @@
 				B5385F0C24D9534700A64CB4 /* REPLBuffer.swift */,
 				B5FFE64A24F938E40011AEE8 /* TestFailure.swift */,
 			);
-			path = XCParser;
+			path = XCTool;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B5F77BFB24D5666F00953D63 /* XCParser */ = {
+		B5F77BFB24D5666F00953D63 /* XCTool */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B5F77C0324D5666F00953D63 /* Build configuration list for PBXNativeTarget "XCParser" */;
+			buildConfigurationList = B5F77C0324D5666F00953D63 /* Build configuration list for PBXNativeTarget "XCTool" */;
 			buildPhases = (
 				B5F77BF824D5666F00953D63 /* Sources */,
 				B5F77BF924D5666F00953D63 /* Frameworks */,
@@ -110,9 +110,9 @@
 			);
 			dependencies = (
 			);
-			name = XCParser;
+			name = XCTool;
 			productName = XCParser;
-			productReference = B5F77BFC24D5666F00953D63 /* XCParser */;
+			productReference = B5F77BFC24D5666F00953D63 /* XCTool */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -129,7 +129,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B5F77BF724D5666F00953D63 /* Build configuration list for PBXProject "XCParser" */;
+			buildConfigurationList = B5F77BF724D5666F00953D63 /* Build configuration list for PBXProject "XCTool" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -142,7 +142,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B5F77BFB24D5666F00953D63 /* XCParser */,
+				B5F77BFB24D5666F00953D63 /* XCTool */,
 			);
 		};
 /* End PBXProject section */
@@ -157,7 +157,7 @@
 				B5F77C0024D5666F00953D63 /* main.swift in Sources */,
 				B5FFE64B24F938E40011AEE8 /* TestFailure.swift in Sources */,
 				B537B11024DD28BD00E0DF06 /* ActionTestPlanRunSummaries.swift in Sources */,
-				B53F313A24DED28700F78EE7 /* XCParser.swift in Sources */,
+				B53F313A24DED28700F78EE7 /* XCTool.swift in Sources */,
 				B537B11224DD903300E0DF06 /* ActionsInvocationRecord.swift in Sources */,
 				B53F313824DEB7F200F78EE7 /* REPLExecutor.swift in Sources */,
 				B53F313624DEB4AF00F78EE7 /* Constants.swift in Sources */,
@@ -291,7 +291,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8MLCLBT8FW;
 				ENABLE_HARDENED_RUNTIME = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sk.XCParser;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sk.XCTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -303,7 +303,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8MLCLBT8FW;
 				ENABLE_HARDENED_RUNTIME = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sk.XCParser;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sk.XCTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -312,7 +312,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B5F77BF724D5666F00953D63 /* Build configuration list for PBXProject "XCParser" */ = {
+		B5F77BF724D5666F00953D63 /* Build configuration list for PBXProject "XCTool" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B5F77C0124D5666F00953D63 /* Debug */,
@@ -321,7 +321,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B5F77C0324D5666F00953D63 /* Build configuration list for PBXNativeTarget "XCParser" */ = {
+		B5F77C0324D5666F00953D63 /* Build configuration list for PBXNativeTarget "XCTool" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B5F77C0424D5666F00953D63 /* Debug */,

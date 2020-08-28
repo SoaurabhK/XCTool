@@ -1,6 +1,6 @@
 //
 //  ArgParser.swift
-//  XCParser
+//  XCTool
 //
 //  Created by Soaurabh Kakkar on 09/08/20.
 //

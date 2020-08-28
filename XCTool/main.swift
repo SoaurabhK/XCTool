@@ -1,6 +1,6 @@
 //
 //  main.swift
-//  XCParser
+//  XCTool
 //
 //  Created by Soaurabh Kakkar on 01/08/20.
 //
@@ -13,7 +13,7 @@ typealias Command = REPLCommand
 
 let arguments = ArgParser.launchArgs
 guard let launchArgs = arguments else {
-    print("Usage: ./XCParser -project <project-path> -scheme <scheme-name> -destination <destination(platform,name,OS(for simulator)>")
+    print("Usage: ./XCTool -project <project-path> -scheme <scheme-name> -destination <destination(platform,name,OS(for simulator)>")
     exit(-1)
 }
 
@@ -26,7 +26,7 @@ guard let xcresultBundle = bundle.projRelativePath else {
 let executor = Executor(command: Command(launchPath: Constants.xcodebuildExecPath, arguments: ["test", "-project", launchArgs.project, "-scheme", launchArgs.scheme, "-destination", launchArgs.destination, "-resultBundlePath", xcresultBundle]))
 let testStatus = executor.exec{ $0?.forEach { print($0) } }
 
-let parser = XCParser(xcresultBundle: xcresultBundle)
+let parser = XCTool(xcresultBundle: xcresultBundle)
 let testSummaries = parser.testSummaries()
 
 guard testStatus != EXIT_SUCCESS else {

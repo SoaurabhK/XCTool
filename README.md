@@ -1,11 +1,11 @@
 ##  About
-```XCParser``` is a command line tool for executing tests and parsing ```.xcresult``` bundle.
+```XCTool``` is a command line tool for executing tests and parsing ```.xcresult``` bundle.
 
 ##  How It Works
-It starts by executing tests using ```xcodebuild``` command. The output ```.xcresult``` bundle is fed to ```XCParser``` to parse performance test-summaries.
+It starts by executing tests using ```xcodebuild``` command. The output ```.xcresult``` bundle is fed to ```XCTool``` to parse performance test-summaries.
 
 ## Types Involved
-1.  ```XCParser``` struct takes path to ```xcresultBundle``` as input and executes ```xcresulttool``` to parse performance test-summaries.
+1.  ```XCTool``` struct takes path to ```xcresultBundle``` as input and executes ```xcresulttool``` to parse performance test-summaries.
 2.  ```ArgParser``` struct parses command-line arguments. It has a method to provide value for a given command-line tag.
 3.  ```ResultBundle``` class takes path to ```xcodeproj``` as input. It has a lazy property to store ```xcresult``` bundle path relative to the project.
 4.  ```Constants``` enum contains constants for executable paths, command-line arguments for ```xcresulttool``` and ```xcodebuild```, project-path and scheme-name.

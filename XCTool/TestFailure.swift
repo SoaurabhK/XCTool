@@ -1,6 +1,6 @@
 //
 //  RetryFailures.swift
-//  XCParser
+//  XCTool
 //
 //  Created by Soaurabh Kakkar on 28/08/20.
 //
@@ -28,7 +28,7 @@ struct TestFailure {
                 continue
             }
             
-            let parser = XCParser(xcresultBundle: retryBundlePath)
+            let parser = XCTool(xcresultBundle: retryBundlePath)
             let retrySummaries = parser.testSummaries()
             return (testStatus, successSummaries + retrySummaries)
         }
