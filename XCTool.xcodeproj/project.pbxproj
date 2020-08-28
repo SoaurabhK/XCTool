@@ -111,7 +111,7 @@
 			dependencies = (
 			);
 			name = XCTool;
-			productName = XCParser;
+			productName = XCTool;
 			productReference = B5F77BFC24D5666F00953D63 /* XCTool */;
 			productType = "com.apple.product-type.tool";
 		};
