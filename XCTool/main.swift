@@ -13,7 +13,7 @@ typealias Command = REPLCommand
 
 let arguments = ArgParser.launchArgs
 guard let launchArgs = arguments else {
-    print("Usage: ./XCTool -workspace <workspace-path> -scheme <scheme-name> -destination <destination(platform,name,OS(for simulator)>")
+    print("Usage: ./XCTool -workspace <workspace-path> -project <project-path> -scheme <scheme-name> -destination <destination(platform,name,OS(for simulator)>")
     exit(-1)
 }
 
