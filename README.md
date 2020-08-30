@@ -10,7 +10,7 @@ To invoke XCTool use the following command:<br/>
 Refer project [.xcscheme](XCTool.xcodeproj/xcshareddata/xcschemes/XCTool.xcscheme#L53-L86) file for an example usage of the command line arguments.
 
 ##  How It Works
-It starts by executing tests using ```xcodebuild test``` command. Test-failures(i.e. flaky environment) are handled by re-running the failing tests. ```.xcresult``` bundle(s) for the test-run are fed to ```XCTool``` to parse performance test-summaries. On completion, test summaries are dump(ed) on the console and ```.xcresult``` bundle(s) are inside project-relative ```ResultBundles``` directory.
+It starts by executing tests using ```xcodebuild test``` command. Test-failures(i.e. flaky environment) are handled by re-running the failing tests. ```XCTool``` extracts performance test-summaries from ```.xcresult``` bundle(s) produced in a test-run. On completion, test summaries are dump(ed) on the console and ```.xcresult``` bundle(s) are inside project-relative ```ResultBundles``` directory.
 
 ## Types Involved
 1.  ```XCTool``` struct takes path to ```xcresultBundle``` as input and executes ```xcresulttool``` to parse performance test-summaries.
