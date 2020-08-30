@@ -29,6 +29,9 @@ xcresulttool version 17017, format version 3.26 (current)
 Xcode 12.0<br/>
 Build version 12A8189n
 
+## License
+XCTool is licensed under the [MIT License](LICENSE.md)
+
 ## Future Support
 Automatically run tests on a connected device:<br/> https://github.com/fastlane/fastlane/blob/master/fastlane_core/lib/fastlane_core/device_manager.rb#L68<br/>
 http://www.maytro.com/2014/05/11/using-xcodebuild-to-automatically-run-tests-on-connected-device.html
