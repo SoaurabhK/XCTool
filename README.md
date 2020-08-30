@@ -1,7 +1,7 @@
 XCTool: To build performance testing pipeline
 ======================================
 
-```XCTool``` is a command line tool for executing tests, automatically re-running failures and parsing ```.xcresult``` bundle. It is currently intended to be integerated with your performance testing CI pipeline.
+```XCTool``` is a command line tool for executing tests, automatically re-running failures and parsing ```.xcresult``` bundle(s). It is currently intended to be integerated with your performance testing CI pipeline.
 
 ## Usage
 To invoke XCTool use the following command:<br/>
@@ -17,10 +17,10 @@ It starts by executing tests using ```xcodebuild test``` command. Test-failures(
 2.  ```ArgParser``` struct parses command-line arguments passed during launch. It has a static var to provide ```launchArgs```.
 3.  ```ResultBundle``` class takes path to ```xcodeproj``` as input. It provides project-relative bundle-path for a given test-run.
 4.  ```Constants``` enum contains constants for executable paths, command-line arguments for ```xcresulttool```, ```xcodebuild``` and maxRetries on failure. Paths may vary dependending on Xcode's install location.
-5.  ```ActionsInvocationRecord``` struct parses ```actions```, ```metadataRef``` and ```metrics``` from the result-bundle. We extract ```testsRefIds``` from this nested data-model.
-6.  ```ActionTestPlanRunSummaries``` struct parses ```summaries``` from the result-bundle. We extract ```summaryRefIds``` correspoding to each test from this nested data-model.
-7.  ```ActionTestSummary``` struct parses ```performanceMetrics```, ```duration```, ```identifier```, ```name``` and ```testStatus``` from the result-bundle. ```TestSummary``` representing a performance test summary, is created from ```ActionTestSummary``` by associating an additional ```targetName``` for each test.
-8.  ```REPLExecutor``` struct takes ```REPLCommand``` as input and executes that command. It's sync-version decodes the result in a given data-model and async-version streams standardOutput buffer line-by-line.
+5.  ```ActionsInvocationRecord``` struct contains ```actions```, ```metadataRef``` and ```metrics``` parsed from the result-bundle. We extract ```testsRefIds``` from this nested data-model.
+6.  ```ActionTestPlanRunSummaries``` struct contains ```summaries``` parsed from the result-bundle. We extract ```summaryRefIds``` correspoding to each test from this nested data-model.
+7.  ```ActionTestSummary``` struct contains ```performanceMetrics```, ```duration```, ```identifier```, ```name``` and ```testStatus``` parsed from the result-bundle. ```TestSummary``` representing a performance test summary, is created from ```ActionTestSummary``` by associating an additional ```targetName``` for each test.
+8.  ```REPLExecutor``` struct takes ```REPLCommand``` as input and executes that command. It's sync-version decodes the result in a given data-model and the async-version streams standardOutput buffer line-by-line.
 9.  ```REPLCommand``` struct takes ```launchPath``` and ```arguments``` as input. It has sync/async ```run``` methods which launch a ```Process``` with given inputs and attach a ```Pipe``` for reading standardOutput.
 10.   ```REPLBuffer``` struct temporarily holds  ```Data``` buffer as it gets streamed from standardOutput. It has mutating methods to ```append``` data in buffer and get ```outstandingText``` from buffer.
 11.  ```TestFailure``` struct takes ```testSummaries``` and project-configuration to retry/re-run failed-tests, due to flaky environment i.e. mostly XCUITests-Runner issues.
