@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Final TestSummary
-struct TestSummary {
+struct TestSummary: Codable {
     let performanceMetrics: [ActionTestPerformanceMetricSummary]?
     let duration: Double?
     let identifier, name: String

@@ -4,7 +4,7 @@ XCTool: To build performance testing pipeline
 ```XCTool``` is a command line tool for executing tests, automatically re-running failures and parsing ```.xcresult``` bundle. It is currently intended to be integerated with your performance testing CI pipeline.
 
 ## Usage
-To invoke XCTool use the following command:
+To invoke XCTool use the following command:<br/>
 ```$ ./XCTool -workspace <workspace-path> -project <project-path> -scheme <scheme-name> -destination <destination(platform,name,OS(for simulator)>```
 
 Refer project [.xcscheme](XCTool.xcodeproj/xcshareddata/xcschemes/XCTool.xcscheme#L53-L86) file for an example usage of the command line arguments.
@@ -44,12 +44,21 @@ Build version 12A8189n
 1.  Automatically run tests on a connected device:<br/>
        https://github.com/fastlane/fastlane/blob/master/fastlane_core/lib/fastlane_core/device_manager.rb#L68<br/>
        http://www.maytro.com/2014/05/11/using-xcodebuild-to-automatically-run-tests-on-connected-device.html<br/>
-2.  Use ```-xctestrun``` option in ```xcodebuild test-without-building``` for distributed build and test machines.<br/>
+2.  Use ```-xctestrun``` option in ```xcodebuild test-without-building``` for distributed build and test machines:<br/>
        https://developer.apple.com/videos/play/wwdc2016/409/<br/>
        https://stackoverflow.com/a/47019252<br/>
 3.  Send performance output to customisable server endpoints.<br/>
 4.  Failure reporting by sending filtered logs and crash-reports to customisable server endpoints.<br/>
 5.  Pretty logging without using ```xcpretty```.<br/>
+PRs, issues, [ideas and suggestions](https://twitter.com/soaurabh) are very welcome!
+
+## Contributing
+XCTool welcomes contributions in the form of GitHub issues and pull-requests: <br/>
+1.  For PRs, please add the purpose and summary of your changes in the PR description.<br/>
+2.  For issues, please add the steps to reproduce and tools/OS version.<br/>
+3.  Make sure you test your contributions.<br/>
+
+By submitting a pull request, you represent that you have the right to license your contribution to Soaurabh Kakkar and the community, and agree by submitting the patch that your contributions are licensed under the XCTool project license.
 
 ## License
 XCTool is licensed under the [MIT License](LICENSE.md)
