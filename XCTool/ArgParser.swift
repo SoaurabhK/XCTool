@@ -31,6 +31,7 @@ struct ArgParser {
 }
 
 struct LaunchArgs {
+    let workspace: String
     let project: String
     let scheme: String
     let destination: String
@@ -41,11 +42,12 @@ extension ArgParser {
         let project = Self.value(for: "-project")
         let scheme = Self.value(for: "-scheme")
         let destination = Self.value(for: "-destination")
+        let workspace = Self.value(for: "-workspace")
         
-        guard let projPath = project, let schemeName = scheme, let runDestination = destination else {
+        guard let projPath = project, let schemeName = scheme, let runDestination = destination, let projWorkspace = workspace else {
             return nil
         }
-        return LaunchArgs(project: projPath, scheme: schemeName, destination: runDestination)
+        return LaunchArgs(workspace: projWorkspace, project: projPath, scheme: schemeName, destination: runDestination)
     }
 }
 

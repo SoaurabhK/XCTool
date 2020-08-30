@@ -20,7 +20,7 @@ struct TestFailure {
         for iteration in 1...maxRetries {
             guard let retryBundlePath = bundle.retryPath(forIteration: iteration) else { continue }
             
-            let executor = Executor(command: Command(launchPath: Constants.xcodebuildExecPath, arguments: ["test", "-project", launchArgs.project, "-scheme", launchArgs.scheme, "-destination", launchArgs.destination, "-resultBundlePath", retryBundlePath] + failedTestsArgs))
+            let executor = Executor(command: Command(launchPath: Constants.xcodebuildExecPath, arguments: ["test-without-building", "-workspace", launchArgs.workspace, "-scheme", launchArgs.scheme, "-destination", launchArgs.destination, "-resultBundlePath", retryBundlePath] + failedTestsArgs))
             let testStatus = executor.exec{ $0?.forEach { print($0) } }
             
             guard testStatus == EXIT_SUCCESS else {

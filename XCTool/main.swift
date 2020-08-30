@@ -13,20 +13,20 @@ typealias Command = REPLCommand
 
 let arguments = ArgParser.launchArgs
 guard let launchArgs = arguments else {
-    print("Usage: ./XCTool -project <project-path> -scheme <scheme-name> -destination <destination(platform,name,OS(for simulator)>")
+    print("Usage: ./XCTool -workspace <workspace-path> -scheme <scheme-name> -destination <destination(platform,name,OS(for simulator)>")
     exit(-1)
 }
 
-let bundle = ResultBundle(xcodeprojPath: launchArgs.project)
+let bundle: ResultBundle = ResultBundle(xcodeprojPath: launchArgs.project)
 guard let xcresultBundle = bundle.projRelativePath else {
     print("Couldn't get a valid .xcresult bundlePath")
     exit(-1)
 }
 
-let executor = Executor(command: Command(launchPath: Constants.xcodebuildExecPath, arguments: ["test", "-project", launchArgs.project, "-scheme", launchArgs.scheme, "-destination", launchArgs.destination, "-resultBundlePath", xcresultBundle]))
+let executor: Executor = Executor(command: Command(launchPath: Constants.xcodebuildExecPath, arguments: ["test", "-workspace", launchArgs.workspace, "-scheme", launchArgs.scheme, "-destination", launchArgs.destination, "-resultBundlePath", xcresultBundle]))
 let testStatus = executor.exec{ $0?.forEach { print($0) } }
 
-let parser = XCTool(xcresultBundle: xcresultBundle)
+let parser: XCTool = XCTool(xcresultBundle: xcresultBundle)
 let testSummaries = parser.testSummaries()
 
 guard testStatus != EXIT_SUCCESS else {
