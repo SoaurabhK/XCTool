@@ -12,9 +12,9 @@ struct REPLCommand {
     let arguments: [String]
     
     func run() -> (result: Data?, exitStatus: Int32) {
-        let (task, stdOutPipe, _) = launchProcess(at: launchPath, with: arguments)
+        let (task, outPipe, _) = launchProcess(at: launchPath, with: arguments)
         let outdata = autoreleasepool { () -> Data? in
-            stdOutPipe.fileHandleForReading.readDataToEndOfFile()
+            outPipe.fileHandleForReading.readDataToEndOfFile()
         }
         task.waitUntilExit()
         let status = task.terminationStatus
@@ -24,63 +24,51 @@ struct REPLCommand {
 
     @discardableResult
     func run(readabilityHandler: @escaping (([String]?) -> Void)) -> Int32 {
-        let (task, stdOutPipe, stdErrPipe) = launchProcess(at: launchPath, with: arguments)
+        let (task, outPipe, errPipe) = launchProcess(at: launchPath, with: arguments)
         
-        let outHandle = stdOutPipe.fileHandleForReading
-        let errHandle = stdErrPipe.fileHandleForReading
-        var outBuffer = REPLBuffer()
-        var errBuffer = REPLBuffer()
         let group = DispatchGroup()
         
-        group.enter()
-        outHandle.readabilityHandler = { fileHandle in
-            let availableOutData = fileHandle.availableData
-            if availableOutData.isEmpty {
-                //EOF reached
-                readabilityHandler(outBuffer.outstandingText())
-                outHandle.readabilityHandler = nil
-                group.leave()
-            } else if let lines = outBuffer.append(availableOutData) {
-                readabilityHandler(lines)
-            }
-        }
-        
-        group.enter()
-        errHandle.readabilityHandler = { fileHandle in
-            let availableOutData = fileHandle.availableData
-            if availableOutData.isEmpty {
-                //EOF reached
-                readabilityHandler(errBuffer.outstandingText())
-                errHandle.readabilityHandler = nil
-                group.leave()
-            } else if let lines = errBuffer.append(availableOutData) {
-                readabilityHandler(lines)
-            }
-        }
+        readBuffer(fileHandle: outPipe.fileHandleForReading, dispatchGroup: group, completion: readabilityHandler)
+        readBuffer(fileHandle: errPipe.fileHandleForReading, dispatchGroup: group, completion: readabilityHandler)
         
         task.waitUntilExit()
         
-        // readabilityHandler is called on background queue, so it's safe to block/wait here.
+        // readabilityHandler is called on background serial queue, so it's safe to block/wait here(i.e. no deadlock)
         group.wait()
         
-        let status = task.terminationStatus
-        return status
+        return task.terminationStatus
     }
     
-    private func launchProcess(at launchPath: String, with arguments: [String]) -> (task: Process, stdOutPipe: Pipe, stdErrPipe: Pipe) {
+    private func readBuffer(fileHandle: FileHandle, dispatchGroup: DispatchGroup, completion: @escaping ([String]?) -> Void) {
+        var buffer = REPLBuffer()
+        dispatchGroup.enter()
+        fileHandle.readabilityHandler = { handle in
+            let availableData = handle.availableData
+            if availableData.isEmpty {
+                //EOF reached
+                completion(buffer.outstandingText())
+                handle.readabilityHandler = nil
+                dispatchGroup.leave()
+            } else if let lines = buffer.append(availableData) {
+                completion(lines)
+            }
+        }
+    }
+    
+    private func launchProcess(at launchPath: String, with arguments: [String]) -> (task: Process, outPipe: Pipe, errPipe: Pipe) {
         return autoreleasepool { () -> (Process, Pipe, Pipe) in
             let task = Process()
             task.executableURL = URL(fileURLWithPath: launchPath)
             task.arguments = arguments
 
-            let stdOutPipe = Pipe()
-            task.standardOutput = stdOutPipe
+            let outPipe = Pipe()
+            task.standardOutput = outPipe
             
-            let stdErrPipe = Pipe()
-            task.standardError = stdErrPipe
+            let errPipe = Pipe()
+            task.standardError = errPipe
             
             try? task.run()
-            return (task, stdOutPipe, stdErrPipe)
+            return (task, outPipe, errPipe)
         }
     }
 }
