@@ -11,9 +11,9 @@ struct REPLBuffer {
     private var buffer = Data()
     private let delimData = String("\n").data(using: .utf8)!
     
-    mutating func append(_ data: Data) -> String? {
+    mutating func append(_ data: Data) -> [String]? {
         buffer.append(data)
-        return getLine()
+        return getLines()
     }
     
     mutating func outstandingText() -> [String]? {
@@ -21,13 +21,10 @@ struct REPLBuffer {
             buffer.removeAll()
             buffer.count = 0
         }
-        guard buffer.count > 0 else {
-            return nil
-        }
         
-        var result = [String]()
-        while let line = getLine() {
-            result.append(line)
+        // Get all complete lines from buffer
+        guard var result = getLines() else {
+            return nil
         }
         
         // Get remaining buffer text(if any)
@@ -37,6 +34,18 @@ struct REPLBuffer {
         result.append(text)
         
         return result
+    }
+    
+    private mutating func getLines() -> [String]? {
+        guard buffer.count > 0 else {
+            return nil
+        }
+        
+        var result = [String]()
+        while let line = getLine() {
+            result.append(line)
+        }
+        return result.isEmpty ? nil : result
     }
     
     private mutating func getLine() -> String? {
