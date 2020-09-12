@@ -1,7 +1,7 @@
 XCTool: To build performance testing pipeline
 ======================================
 
-```XCTool``` is a command line tool for executing tests, automatically re-running failures and parsing ```.xcresult``` bundle(s). It is currently intended to be integerated with your performance testing CI pipeline.
+```XCTool``` is a command line tool for executing tests, automatically re-running failures and parsing ```.xcresult``` bundle(s). It is currently intended to be integrated with your performance testing CI pipeline.
 
 ## Usage
 To invoke XCTool use the following command:<br/>
